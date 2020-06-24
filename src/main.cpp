@@ -18,6 +18,15 @@
 #include <typeinfo>
 // using namespace std;
 
+/* a little reminder of things*/
+// std::cout << "Type of digit is : " << typeid(name).name() << std::endl;
+
+/*  loop through vector
+for(auto i = result.begin() ; i < result.end(); i++){
+	std::cout << "its "<< *i;
+}*/
+
+
 /*BINARY TO DECIMAL & VICE VERSA CONVERTA*/
 int integerReverser(int num){
 	int rev;
@@ -56,21 +65,11 @@ std::vector<int> integerToVectorConverter(int number){
 	//std::cout << "The string is :" << str;
 	// add the digits one by one in the array
 	for(int i = 0; i < str.size(); i++){
-		// digit = std::stoi(str[i]);
-
-		// need to convert this to a charector:
-		digit = (int)str[i];
-		std::cout << "Type of digit is : " << typeid(str[i]).name() << std::endl;
-		std::cout << "---- " << digit << std::endl;
-		result.push_back(digit); // problem here is that im storing strings into result instead of int's
-		std::cout << "-- : " <<str[i] << std::endl;
+		// convert an integer string to an int
+		digit = str[i] - '0';
+		result.push_back(digit); 
 	}
 
-	for(auto i = result.begin() ; i < result.end(); i++){
-		std::cout << "its "<< *i;
-	}
-
-	// std::cout << result << std::endl; 
 	return result;
 
 }
@@ -78,7 +77,6 @@ std::vector<int> integerToVectorConverter(int number){
 // takes in the array and the name we want to convert to
 int decimalToBinary(){
 	int number;
-	
 	int result = 0;
 
 	std::cout << "input the number you want to convert to Binary" << std::endl;
@@ -94,11 +92,11 @@ int decimalToBinary(){
 	// }
 
 
-	// convert vector to integer:
-	// for (int d : kv)  {
-	//     result = result * 10 + d;
-	// }
-		//std::cout << "a" ;
+	//convert vector to integer:
+	for (int d : kv)  {
+	    result = result * 10 + d;
+	}
+	//std::cout << "a" ;
 	return result;
 }
 
