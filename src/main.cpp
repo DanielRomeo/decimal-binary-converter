@@ -55,49 +55,61 @@ int numberOfDigitsInInteger(int number){
 std::vector<int> integerToVectorConverter(int number){
 	int digit;
 	std::vector<int> result;
-	//int loop_number = numberOfDigitsInInteger(number);
-	//string str = to_string(number);
 	std::stringstream ss;
 	ss << number;
 	std::string str = ss.str();
-
 	std::cout << str << std::endl;
-	//std::cout << "The string is :" << str;
-	// add the digits one by one in the array
+
 	for(int i = 0; i < str.size(); i++){
 		// convert an integer string to an int
 		digit = str[i] - '0';
 		result.push_back(digit); 
 	}
-
 	return result;
+}
 
+int vectorToIntegerConverter(std::vector<int> vecNumber){
+	// reverse(v.begin(), v.end());
+    int decimal = 1;
+    int total = 0;
+    for (auto& it : vecNumber)
+    {
+        total += it * decimal;
+        decimal *= 10;
+    }
+    return total;
 }
 
 // takes in the array and the name we want to convert to
 int decimalToBinary(){
 	int number;
 	int result = 0;
+	int base = 2;
+	int newNumber ;
+	int data ;
+	std::vector<int> bin;
+	int newInteger;
 
 	std::cout << "input the number you want to convert to Binary" << std::endl;
 	std::cin >> number;
 
-	// kv is a vector:
-	// kv = integerToVectorConverter(number);
-	std::vector<int> kv(integerToVectorConverter(number));
+	newNumber = number;
+	while(newNumber > 0){
 
-	// lets see whats inside the vector:
-	// for(auto i = kv.begin() ; i < kv.end(); i++){
-	// 	std::cout << "its "<< *i;
-	// }
+		data = number % 2;
 
-
-	//convert vector to integer:
-	for (int d : kv)  {
-	    result = result * 10 + d;
+		newNumber = number / 2;
+		if(data > 0){
+			bin.push_back(1);
+		}else{
+			bin.push_back(0);
+		}
+		number = newNumber;
 	}
-	//std::cout << "a" ;
-	return result;
+
+	newInteger = vectorToIntegerConverter(bin);
+
+	return newInteger;
 }
 
 int binaryToDecimal(){
@@ -119,7 +131,7 @@ int main() {
 		output = decimalToBinary();
 	}
 
-	std::cout <<"Final answer: " <<  output << std::endl;
+	std::cout <<"\nAnswer : " <<  output << std::endl;
 
 	return 0;
 }
