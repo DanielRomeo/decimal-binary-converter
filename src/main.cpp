@@ -113,7 +113,41 @@ int decimalToBinary(){
 }
 
 int binaryToDecimal(){
-	return 4;
+	int number;
+	int vecNumber;
+	int base = 2;
+	int thePower;
+	int digit ;
+	int sum =0;
+	std::cout << "input the number you want to convert to Decimal" << std::endl;
+	std::cin >> number;
+
+	// convert number to a vector
+	//vecNumber = integerToVectorConverter(number);
+
+
+	// convert a number into a string so that we can loop through it.
+	std::stringstream ss;
+	ss << number;
+	std::string str = ss.str();
+
+	thePower = str.size();
+	
+	// loop through vector and add together values:
+	for (int i = 0; i < str.size(); i++)
+	{
+		thePower--;
+		std::cout <<"\n"<< i << " base :" <<base << " power : " << thePower <<". The digit is " << digit;
+
+		digit = str[i] - '0';		
+		digit = digit *pow(base, thePower) ;
+		
+		sum += digit;
+		
+	}
+
+
+	return sum;
 }
 
 int main() {
