@@ -7,6 +7,8 @@
 //============================================================================
 
 #include <iostream>
+#include <bits/stdc++.h>
+#include <cctype>
 #include <string>
 #include <fstream>
 #include <vector>
@@ -50,6 +52,10 @@ int numberOfDigitsInInteger(int number){
 
 	return result;
 }
+
+// std::vector<string> vectorToStringConverter(std::vectore<int> vec){
+
+// }
 
 // function that converts a number into an array
 std::vector<int> integerToVectorConverter(int number){
@@ -122,15 +128,10 @@ int binaryToDecimal(){
 	std::cout << "input the number you want to convert to Decimal" << std::endl;
 	std::cin >> number;
 
-	// convert number to a vector
-	//vecNumber = integerToVectorConverter(number);
-
-
 	// convert a number into a string so that we can loop through it.
 	std::stringstream ss;
 	ss << number;
 	std::string str = ss.str();
-
 	thePower = str.size();
 	
 	// loop through vector and add together values:
@@ -141,28 +142,169 @@ int binaryToDecimal(){
 
 		digit = str[i] - '0';		
 		digit = digit *pow(base, thePower) ;
-		
 		sum += digit;
-		
 	}
-
-
 	return sum;
 }
 
+// -------------------------------------------------------------------------------------------
+
+std::string decimalToHex(){
+	/*	
+		i have a vector of strings...
+		-> convert vector to a string
+	*/
+
+	int i = 0;
+	float number;
+	int newNumber;
+	float base = 8.00;
+	int mainer;
+	float answer = 0.00;
+	// float remainder;
+	float decimal ;
+	int digit;
+	int sum = 0;
+	std::vector<std::string> bin;
+	std::string charector;
+	std::string sDigit ;
+	std::string result;
+
+	std::cout << "input the number you want to convert to Decimal" << std::endl;
+	std::cin >> number;
+
+
+	answer = number / base;
+	while(answer >0){
+
+		//may need to figure out why answer never goes below zero.
+		if(answer == 0){
+			i++;
+		}
+		if(i == 5){
+			break;
+		}
+
+		mainer = (int)answer;
+		decimal = answer - mainer;
+		digit = base * decimal;
+
+		// convert digit to string:
+		sDigit = std::to_string(digit);
+		//Hex adjustments-- convert numbers to Alphabets
+
+		// switch(sDigit){
+		// 	case "10": 
+		// 		charector = "A";
+		// 		bin.push_back(charector);
+		// 		continue;
+		// 	case "11": 
+		// 		charector = "B";
+		// 		bin.push_back(charector);
+		// 		continue;
+		// 	case "12": 
+		// 		charector = "C";
+		// 		bin.push_back(charector);
+		// 		continue;
+		// 	case "13": 
+		// 		charector = "D";
+		// 		bin.push_back(charector);
+		// 		continue;
+		// 	case "14": 
+		// 		charector = "E";
+		// 		bin.push_back(charector);
+		// 		continue;
+		// 	case "15": 
+		// 		charector = "F";
+		// 		bin.push_back(charector);
+		// 		continue;
+		// }
+		if(sDigit == "10"){
+			charector = "A";
+			bin.push_back("A");
+			continue;
+		}
+
+
+		bin.push_back(sDigit);
+
+
+
+		number = answer;	
+		answer = number / base;
+	}
+
+	//convert vector to a string:
+	for(const auto &piece : bin){
+		result += piece;
+	}
+
+	// newNumber = vectorToIntegerConverter(bin);
+	return "a";	
+}
+
+/*-----------------------------*/
+
+int decimalToOct(){
+	int i = 0;
+	float number;
+	int newNumber;
+	float base = 8.00;
+	int mainer;
+	float answer = 0.00;
+	// float remainder;
+	float decimal ;
+	int digit;
+	int sum = 0;
+	std::vector<int> bin;
+
+	std::cout << "input the number you want to convert to Decimal" << std::endl;
+	std::cin >> number;
+
+	//newNumber = number;
+	answer = number / base;
+	while(answer >0){
+		
+		
+		/*may need to figure out why answer never goes below zero.*/
+		if(answer == 0){
+			i++;
+		}
+		if(i == 5){
+			break;
+		}
+
+		/*get the mianer and the decimal*/ //1: turn it into an integer:
+		mainer = (int)answer;
+		decimal = answer - mainer;
+		digit = base * decimal;
+		bin.push_back(digit);
+		number = answer;	
+		answer = number / base;
+	}
+
+	newNumber = vectorToIntegerConverter(bin);
+	return newNumber;	
+}
+
+// -------------------------------------------------------------------------------------------
+
 int main() {
-
-	/*Goal is to let user select what they want to the numbers*/
-	//vector <int> binaryNumbers;
 	char input;
-	int output;
+	auto output= 0.00;
 
-	std::cout << "(A) Convert binary to decimal \n(B) Convert decimal to binary" << std::endl;
+	std::cout << "(A) Convert binary to decimal \n---------------------- \n(B) Convert decimal to binary\n(C) Convert decimal to hexidecimal \n(D) Convert decimal to Octal" << std::endl;
+	
+
 	std::cin >> input;
 	if(input == 'a' || input =='A'){
 		output = binaryToDecimal();
 	}else if(input == 'b' || input == 'B'){
 		output = decimalToBinary();
+	}else if(input == 'c' || input == 'C'){
+		output = decimalToHex();
+	}else if(input == 'd' || input == 'D'){
+		output = decimalToOct();
 	}
 
 	std::cout <<"\nAnswer : " <<  output << std::endl;
